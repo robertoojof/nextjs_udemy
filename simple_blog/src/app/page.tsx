@@ -1,7 +1,9 @@
+import SpinLoader from '@/components/SpinLoader';
+
 export default function Home() {
   return (
     <div>
-      <h1>Clean</h1>
+      <SpinLoader className='min-h-40' />
     </div>
   );
 }
