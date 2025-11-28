@@ -1,12 +1,4 @@
-export interface PostModel {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt: string;
-  content: string;
-  coverImageUrl: string;
-  published: boolean;
-  createdAt: string;
-  updatedAt: string;
-  author: string;
-}
+import { z } from 'zod';
+import { PostSchema } from './post.schema';
+
+export type PostModel = z.infer<typeof PostSchema>;
