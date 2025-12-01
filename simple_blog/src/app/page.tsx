@@ -1,11 +1,12 @@
 import Container from '@/components/Container';
+import Header from '@/components/Header';
 import PostsList from '@/components/PostsList';
 
 export default function Home() {
   return (
     <Container>
-      <h1 className='text-3xl font-bold underline'>Posts</h1>
-      
+      <Header title='My Simple Blog' />
+
       <PostsList />
     </Container>
   );
