@@ -20,18 +20,10 @@ export async function simulateDelay(delayMs: number): Promise<void> {
 }
 
 export function formatDate(date: string): string {
-  if (!date || isValid(date) === false) {
-    throw new Error('Invalid date provided to formatDate function.');
-  }
-
   return formatDateFns(new Date(date), "dd/MM/yyyy 'às' HH:mm");
 }
 
 export function relativeDate(date: string): string {
-  if (!date || isValid(date) === false) {
-    throw new Error('Invalid date provided to relativeDate function.');
-  }
-
   return formatDistanceToNow(new Date(date), {
     locale: ptBR,
     addSuffix: true,
