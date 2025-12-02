@@ -1,3 +1,4 @@
+import { formatDate, formatRelativeDate } from '@/lib/utils';
 import PostCoverImage from '../PostCoverImage';
 import PostHeading from '../PostHeading';
 
@@ -20,8 +21,9 @@ export default function PostFeatured() {
         <time
           dateTime='2024-06-01'
           className='text-slate-600 block text-sm/tight select-none'
+          title={formatRelativeDate('2024-04-20T10:00:00')}
         >
-          20/04/2024 10:00
+          {formatDate('2024-06-01')}
         </time>
         <PostHeading
           as='h1'

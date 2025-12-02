@@ -31,7 +31,7 @@ export function formatDate(date: string): string {
   return fomatedDate;
 }
 
-export function relativeDate(date: string): string {
+export function formatRelativeDate(date: string): string {
   const dateObj = new Date(date);
 
   if (!isValid(dateObj)) {
