@@ -28,7 +28,7 @@ export default async function PostsList() {
                 dateTime={post.updatedAt}
                 className='text-slate-600 block text-sm/tight select-none'
               >
-                {formatDate(new Date(post.updatedAt))}
+                {formatDate(post.updatedAt)}
               </time>
 
               <PostHeading as='h2' link={postLink}>
