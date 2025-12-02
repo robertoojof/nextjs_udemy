@@ -20,11 +20,25 @@ export async function simulateDelay(delayMs: number): Promise<void> {
 }
 
 export function formatDate(date: string): string {
-  return formatDateFns(new Date(date), "dd/MM/yyyy 'às' HH:mm");
+  const dateObj = new Date(date);
+
+  if (!isValid(dateObj)) {
+    throw new Error('Invalid date');
+  }
+
+  const fomatedDate = formatDateFns(dateObj, "dd/MM/yyyy 'às' HH:mm");
+
+  return fomatedDate;
 }
 
 export function relativeDate(date: string): string {
-  return formatDistanceToNow(new Date(date), {
+  const dateObj = new Date(date);
+
+  if (!isValid(dateObj)) {
+    throw new Error('Invalid date');
+  }
+
+  return formatDistanceToNow(dateObj, {
     locale: ptBR,
     addSuffix: true,
   });
