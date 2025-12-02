@@ -21,10 +21,12 @@ export class JsonPostRepository implements PostRepository {
       throw new Error('JSON inválido para PostModel');
     }
 
-    return result.data.posts;
+    const publishedPosts = result.data.posts.filter(post => post.published);
+
+    return publishedPosts;
   }
 
-  async findAll(): Promise<PostModel[]> {
+  async findAllPublic(): Promise<PostModel[]> {
     await simulateDelay(SIMULATED_DELAY_MS);
 
     const posts = await this._readFromDisk();
