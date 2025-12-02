@@ -6,7 +6,6 @@ export default function Home() {
   return (
     <Container>
       <Header title='My Simple Blog' />
-
       <PostsList />
     </Container>
   );
