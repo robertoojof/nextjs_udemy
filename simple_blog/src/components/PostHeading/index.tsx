@@ -1,13 +1,15 @@
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
+export type HeadingTag = 'h1' | 'h2';
+
 interface PostHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   children: React.ReactNode;
   link?: string;
-  as: 'h1' | 'h2';
+  as: HeadingTag;
 }
 
-export default function PostHeading({
+export function PostHeading({
   children,
   link,
   as: Tag = 'h2',
