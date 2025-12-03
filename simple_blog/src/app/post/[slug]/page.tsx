@@ -1,4 +1,6 @@
 import { findPostBySlugCached } from '@/lib/posts/queries';
+import { PostModel } from '@/models/post/post.model';
+import { notFound } from 'next/navigation';
 
 type PostSlugPageProps = {
   params: Promise<{ slug: string }>;
