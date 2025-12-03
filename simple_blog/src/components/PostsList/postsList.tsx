@@ -1,14 +1,14 @@
 import PostCoverImage from '../PostCoverImage';
 import PostSumary from '../PostSumary';
-import { findAllPublicPosts } from '@/lib/posts/queries';
+import { findAllPublicPostsCached } from '@/lib/posts/queries';
 
 export default async function PostsList() {
-  const posts = await findAllPublicPosts();
+  const posts = await findAllPublicPostsCached();
 
   return (
     <div className='grid grid-cols-1 gap-8 pb-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
       {posts.map(post => {
-        const postLink = `/posts/${post.slug}`;
+        const postLink = `/post/${post.slug}`;
 
         return (
           <div key={post.id} className='flex flex-col gap-4 group '>

@@ -18,7 +18,7 @@ const mockedPost: PostModel = {
     ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque lobortis augue at lorem venenatis facilisis.Aenean nec pellentesque mi, ut rhoncus erat. Cras ante tellus, ultricies non nisl consequat, feugiat porta sapien. Duis maximus, eros in convallis ullamcorper, quam neque vulputate lorem, quis pretium libero justo ac libero. Donec quam justo, efficitur sit amet gravida ut, auctor sed lacus. Nam in lorem sed velit sodales ullamcorper in non erat. Praesent euismod, nunc vel congue cursus, massa erat faucibus libero, in efficitur ligula erat et velit. Curabitur euismod, nisl vel tincidunt elementum, nunc urna facilisis massa, a fringilla libero nulla nec nisi. Sed euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc, eget aliquam nisl nunc eu nisl. Nulla facilisi. Donec euismod, nisl vel tincidunt elementum, nunc urna facilisis massa, a fringilla libero nulla nec nisi.',
 };
 
-const mockedPostLink = `/posts/${mockedPost.slug}`;
+const mockedPostLink = `/post/${mockedPost.slug}`;
 
 export default function PostFeatured() {
   return (
