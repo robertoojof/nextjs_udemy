@@ -1,6 +1,4 @@
-import { formatDate, formatRelativeDate } from '@/lib/utils';
 import PostCoverImage from '../PostCoverImage';
-import { PostHeading } from '../PostHeading';
 import { PostModel } from '@/models/post/post.model';
 import PostSumary from '../PostSumary';
 
