@@ -8,7 +8,7 @@ import { simulateDelay } from '@/lib/utils';
 const ROOT_DIR = process.cwd();
 const JSON_POSTS_PATH = resolve(ROOT_DIR, 'src', 'db', 'seed', 'posts.json');
 
-const SIMULATED_DELAY_MS: number = 0;
+const SIMULATED_DELAY_MS: number = 5000;
 
 export class JsonPostRepository implements PostRepository {
   private async _readFromDisk(): Promise<PostModel[]> {

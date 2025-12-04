@@ -1,9 +1,10 @@
+import { PostModel } from '@/models/post/post.model';
 import PostCoverImage from '../PostCoverImage';
 import PostSumary from '../PostSumary';
 import { findAllPublicPostsCached } from '@/lib/posts/queries';
 
 export default async function PostsList() {
-  const posts = await findAllPublicPostsCached();
+  const posts: PostModel[] = (await findAllPublicPostsCached()).slice(1);
 
   return (
     <div className='grid grid-cols-1 gap-8 pb-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
