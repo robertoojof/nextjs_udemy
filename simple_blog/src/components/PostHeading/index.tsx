@@ -6,7 +6,7 @@ export type HeadingTag = 'h1' | 'h2';
 interface PostHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   children: React.ReactNode;
   link: string;
-  as: HeadingTag;
+  as?: HeadingTag;
 }
 
 export function PostHeading({

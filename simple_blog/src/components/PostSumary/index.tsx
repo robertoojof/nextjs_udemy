@@ -1,6 +1,6 @@
-import { formatDate, formatRelativeDate } from '@/lib/utils';
 import { HeadingTag, PostHeading } from '../PostHeading';
 import { PostModel } from '@/models/post/post.model';
+import PostDate from '../PostDate';
 
 interface PostSumaryProps {
   post: Pick<PostModel, 'title' | 'excerpt' | 'updatedAt'>;
@@ -15,13 +15,7 @@ export default function PostSumary({
 }: PostSumaryProps) {
   return (
     <div className='flex flex-col gap-4 sm:justify-center'>
-      <time
-        dateTime={post.updatedAt}
-        className='text-slate-600 block text-sm/tight select-none'
-        title={formatRelativeDate(post.updatedAt)}
-      >
-        {formatDate(post.updatedAt)}
-      </time>
+      <PostDate date={post.updatedAt} />
 
       <PostHeading as={postHeadingLevel} link={postLink}>
         {post.title}
