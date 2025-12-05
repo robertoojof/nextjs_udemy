@@ -105,3 +105,11 @@ export default function Counter() {
   );
 }
 ```
+
+componentes de servidor importados em componentes de cliente são permitidos e se
+transformam em componentes de cliente automaticamente. Isso se voce usa o
+import, mas se voce importa ele como uma children prop, ele continua sendo um
+servercomponent.
+
+Mas o contrário não acontece, os clientcomponents importados em servercomponents
+continuam sendo clientcomponents.
