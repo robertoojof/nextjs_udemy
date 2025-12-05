@@ -12,6 +12,8 @@ const SIMULATED_DELAY_MS: number = 5000;
 
 export class JsonPostRepository implements PostRepository {
   private async _readFromDisk(): Promise<PostModel[]> {
+    await simulateDelay(SIMULATED_DELAY_MS);
+
     const data = await fs.promises.readFile(JSON_POSTS_PATH, 'utf-8');
     const json = JSON.parse(data);
 
@@ -27,8 +29,6 @@ export class JsonPostRepository implements PostRepository {
   }
 
   async findAllPublic(): Promise<PostModel[]> {
-    await simulateDelay(SIMULATED_DELAY_MS);
-
     const posts = await this._readFromDisk();
     return posts;
   }
