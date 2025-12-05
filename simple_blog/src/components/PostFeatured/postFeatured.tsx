@@ -33,7 +33,7 @@ export default async function PostFeatured() {
   return (
     <section className='grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2 group'>
       <PostCoverImage
-        linkProps={{ href: post.slug }}
+        linkProps={{ href: postLink }}
         imageProps={{
           src: post.coverImageUrl,
           alt: post.title,

@@ -5,7 +5,7 @@ export type HeadingTag = 'h1' | 'h2';
 
 interface PostHeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   children: React.ReactNode;
-  link?: string;
+  link: string;
   as: HeadingTag;
 }
 
@@ -23,7 +23,7 @@ export function PostHeading({
 
   return (
     <Tag className={cn(headingClassesMap.get(Tag), commonClasses)}>
-      <Link href={link ?? '#'} className='hover:text-slate-800 transition'>
+      <Link href={link} className='hover:text-slate-800 transition'>
         {children}
       </Link>
     </Tag>
