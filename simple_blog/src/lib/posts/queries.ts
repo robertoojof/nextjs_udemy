@@ -12,7 +12,7 @@ export const findAllPublicPostsCached = cache(
 export const findPostBySlugCached = cache(async function findPostBySlugCached(
   slug: string,
 ): Promise<PostModel> {
-  const post = await postRepository.findBySlug(slug).catch(() => null);
+  const post = await postRepository.findBySlugPublic(slug).catch(() => null);
 
   if (!post) {
     console.log('Erro'); 

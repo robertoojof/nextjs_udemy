@@ -25,7 +25,7 @@ export default function ErrorMessage({
         )}
       >
         <div>
-          <h1 className='text-7xl/tight mb-4 font-extrabold'>{contentTitle}</h1>
+          <h2 className='text-7xl/tight mb-4 font-extrabold'>{contentTitle}</h2>
           <div>{content}</div>
         </div>
       </div>
