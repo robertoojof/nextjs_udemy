@@ -1,19 +1,15 @@
-import { cn } from '@/lib/utils';
+import ErrorMessage from '@/components/ErrorMessage';
 
 export default function NotFound() {
   return (
-    <div
-      className={cn(
-        'min-h-80 bg-slate-900 text-slate-100',
-        'mb-16 p-8 rounded-xl',
-        'flex items-center justify-center',
-        'text-center',
-      )}
-    >
-      <div>
-        <h1 className='text-7xl/tight mb-4 font-extrabold'>404</h1>
-        <p>Erro 404: A página que você está procurando não foi encontrada.</p>
-      </div>
-    </div>
+    <ErrorMessage
+      pageTitle='404 Not Found'
+      contentTitle='404 - Page Not Found'
+      content={
+        <p className='text-lg text-slate-400'>
+          Sorry, the page you are looking for does not exist.
+        </p>
+      }
+    />
   );
 }
