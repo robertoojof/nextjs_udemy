@@ -8,7 +8,7 @@ const sqlLiteDB = new Database(sqliteDataBaseFilePath);
 
 export const drizzleDB = drizzle(sqlLiteDB, {
   schema: {
-    postsTable,
+    posts: postsTable,
   },
   // logger: true,
 });
