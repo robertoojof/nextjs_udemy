@@ -43,3 +43,15 @@ export function formatRelativeDate(date: string): string {
     addSuffix: true,
   });
 }
+
+export function formatHour(date: string): string {
+  const dateObj = new Date(date);
+
+  if (!isValid(dateObj)) {
+    throw new Error('Invalid date');
+  }
+
+  const fomatedDate = formatDateFns(dateObj, 'HH:mm:ss');
+
+  return fomatedDate;
+}
