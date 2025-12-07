@@ -30,17 +30,18 @@ export default function SpinLoader({
   );
 
   return (
-    <div className={containerClasses} {...props}>
-      <div
+    <span className={containerClasses} {...props}>
+      <span
         className={cn(
           sizeMap[variant],
+          'block',
           'border-zinc-400 border-t-blue-500',
           'border-t-transparent',
           'rounded-full',
           'animate-spin',
           speedMap[speed],
         )}
-      ></div>
-    </div>
+      ></span>
+    </span>
   );
 }
