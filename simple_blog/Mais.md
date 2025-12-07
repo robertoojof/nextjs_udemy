@@ -88,3 +88,7 @@ marcar as páginas com tags usando a função 'tags' do next/cache)
 
 nota: ao terminar o curso refatorar para uso da diretiva 'use cache' que se
 tornou estável no next 16.
+
+## Links Úteis
+
+- <https://nextjs.org/docs/app/building-your-application/data-fetching/caching>
