@@ -79,3 +79,12 @@ diretiva 'use server' no componente ou função.
 
 off, carece presquisa: revalidateTag() - revalida tags específicas (precisa
 marcar as páginas com tags usando a função 'tags' do next/cache)
+
+- diretiva 'use cache'
+- cacheComponents
+- cacheLife
+- updateTag
+- revalidateTag
+
+nota: ao terminar o curso refatorar para uso da diretiva 'use cache' que se
+tornou estável no next 16.
