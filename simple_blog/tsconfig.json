@@ -36,6 +36,9 @@
       ],
       "@actions/*": [
         "./src/app/actions/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
       ]
     }
   },
