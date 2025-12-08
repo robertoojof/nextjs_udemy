@@ -1,16 +1,17 @@
-import { formatDate, formatRelativeDate } from '@/lib/utils';
+import { formatRelativeDateCached } from '@/lib/cache_utils';
+import { formatDate } from '@/lib/utils';
 
 interface PostDateProps {
   date: string;
   className?: string;
 }
 
-export default function PostDate({ date }: PostDateProps) {
+export default async function PostDate({ date }: PostDateProps) {
   return (
     <time
       dateTime={date}
       className='text-slate-600 text-sm/tight select-none'
-      title={formatRelativeDate(date)}
+      title={await formatRelativeDateCached(date)}
     >
       {formatDate(date)}
     </time>

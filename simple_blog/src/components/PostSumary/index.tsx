@@ -3,7 +3,7 @@ import { PostModel } from '@/models/post/post.model';
 import PostDate from '../PostDate';
 
 interface PostSumaryProps {
-  post: Pick<PostModel, 'title' | 'excerpt' | 'updatedAt'>;
+  post: Pick<PostModel, 'title' | 'excerpt' | 'createdAt'>;
   postLink: string;
   postHeadingLevel?: HeadingTag;
 }
@@ -15,7 +15,7 @@ export default function PostSumary({
 }: PostSumaryProps) {
   return (
     <div className='flex flex-col gap-4 sm:justify-center'>
-      <PostDate date={post.updatedAt} />
+      <PostDate date={post.createdAt} />
 
       <PostHeading as={postHeadingLevel} link={postLink}>
         {post.title}

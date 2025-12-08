@@ -1,7 +1,11 @@
+import { cacheLife, cacheTag } from 'next/cache';
 import Link from 'next/link';
 
 async function getCurrentYear(): Promise<number> {
   'use cache';
+  cacheTag('footer-current-year');
+  cacheLife('days'); // Cache for 1 day
+
   return new Date().getFullYear();
 }
 
