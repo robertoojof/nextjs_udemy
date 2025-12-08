@@ -7,3 +7,7 @@ export const findPostByIdAdmin = cache(async function findPostByIdAdmin(
 ): Promise<PostModel> {
   return await postRepository.findById(id);
 });
+
+export const findAllPostAdmin = cache(async () => {
+  return postRepository.findAll();
+});

@@ -1,7 +1,11 @@
+import PostsListAdmin from '@/components/PostsListAdmin';
+import SpinLoader from '@/components/SpinLoader';
+import { Suspense } from 'react';
+
 export default async function AdminPostPage() {
   return (
-    <div>
-      <h1>Admin Post Page</h1>
-    </div>
+    <Suspense fallback={<SpinLoader className='mb-16' />}>
+      <PostsListAdmin />
+    </Suspense>
   );
 }

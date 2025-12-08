@@ -11,14 +11,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export async function simulateDelay(delayMs: number): Promise<void> {
-  if (delayMs <= 0) return;
-
-  return new Promise<void>(resolve => {
-    setTimeout(() => resolve(), delayMs);
-  });
-}
-
 export function formatDate(date: string): string {
   const dateObj = new Date(date);
 
