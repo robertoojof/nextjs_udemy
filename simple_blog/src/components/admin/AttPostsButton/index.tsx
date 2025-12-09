@@ -17,9 +17,13 @@ export default function AttPostsButton() {
     <button
       onClick={handleClick}
       disabled={isPending}
-      className={cn('bg-blue-500', 'cursor-pointer')}
+      className={cn(
+        'bg-blue-500 hover:bg-blue-600 rounded-xl p-2 m-3',
+        `${isPending ? 'cursor-not-allowed' : 'hover:bg-blue-600 cursor-pointer'}`,
+        'text-white',
+      )}
     >
-      Atualizar Posts
+      {isPending ? 'Atualizando...' : 'Atualizar Posts'}
     </button>
   );
 }

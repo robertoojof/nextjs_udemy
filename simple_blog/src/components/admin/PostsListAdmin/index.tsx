@@ -13,9 +13,13 @@ export default async function PostsListAdmin() {
       <>
         <ErrorMessage
           contentTitle='Ops 🏜️'
-          content='Nenhum post criado por enquanto...'
+          content={
+            <>
+              <p>Nenhum post criado por enquanto...</p>
+              <AttPostsButton />
+            </>
+          }
         />
-        <AttPostsButton />
       </>
     );
   }
@@ -28,7 +32,7 @@ export default async function PostsListAdmin() {
             className={cn(
               'py-2 px-2',
               !post.published && 'italic',
-              'flex gap-2 items-center justify-between',
+              'flex gap-2 items-center justify-between rounded-md',
               'hover:bg-slate-300 hover:scale-105 transition-transform ease-in-out duration-200',
             )}
             key={post.id}
