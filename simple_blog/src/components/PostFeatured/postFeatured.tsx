@@ -2,6 +2,7 @@ import PostCoverImage from '../PostCoverImage';
 import { PostModel } from '@/models/post/post.model';
 import PostSumary from '../PostSumary';
 import { findAllPublicPostsCached } from '@/lib/posts/queries/public';
+import ErrorMessage from '../ErrorMessage';
 
 /* 
   const mockedPost: PostModel = {
@@ -25,6 +26,15 @@ const mockedPostLink = `/post/${mockedPost.slug}`;
 
 export default async function PostFeatured() {
   const posts: PostModel[] = await findAllPublicPostsCached();
+
+  if (posts.length === 0) {
+    return (
+      <ErrorMessage
+        contentTitle='Ops 😅'
+        content='Ainda não criamos nenhum post.'
+      />
+    );
+  }
 
   const post = posts[0];
 

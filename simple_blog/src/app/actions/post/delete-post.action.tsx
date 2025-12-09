@@ -4,7 +4,13 @@
 import { postRepository } from '@/repositories/post';
 import { updateTag } from 'next/cache';
 
-export async function deletePostAction(id: string) {
+type DeletePostActionResult = {
+  error: string;
+};
+
+export async function deletePostAction(
+  id: string,
+): Promise<DeletePostActionResult> {
   // const isAuthenticated = await verifyLoginSession();
 
   // if (!isAuthenticated) {

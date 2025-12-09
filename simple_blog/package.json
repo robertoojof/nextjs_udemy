@@ -8,7 +8,13 @@
     "start": "next start",
     "lint": "eslint",
     "prett:format": "prettier --write .",
-    "prett:check": "prettier --check ."
+    "prett:check": "prettier --check .",
+    "db:seed": "tsx ./src/db/drizzle/seed.ts",
+    "drizzle.drop": "drizzle-kit drop --config ./drizzle.config.mjs",
+    "drizzle:generate": "drizzle-kit generate --config ./drizzle.config.mjs",
+    "drizzle:migrate": "drizzle-kit migrate --config ./drizzle.config.mjs",
+    "drizzle:push": "drizzle-kit push --config ./drizzle.config.mjs",
+    "drizzle:pull": "drizzle-kit pull --config ./drizzle.config.mjs"
   },
   "dependencies": {
     "better-sqlite3": "^12.5.0",

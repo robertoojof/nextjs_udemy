@@ -3,19 +3,19 @@
 import { cn } from '@/lib/utils';
 
 interface ErrorMessageProps {
-  pageTitle: string;
+  pageTitle?: string;
   contentTitle: string;
   content: React.ReactNode;
 }
 
 export default function ErrorMessage({
-  pageTitle,
+  pageTitle = '',
   contentTitle,
   content,
 }: ErrorMessageProps) {
   return (
     <>
-      <title>{pageTitle}</title>
+      {pageTitle && <title>{pageTitle}</title>}
       <div
         className={cn(
           'min-h-80 bg-slate-900 text-slate-100',
