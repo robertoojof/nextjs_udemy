@@ -9,8 +9,8 @@ type DialogProps = {
   isVisible?: boolean;
   title: string;
   content: React.ReactNode;
-  onConfirm: () => void;
-  onCancel: () => void;
+  onConfirmAction: () => void;
+  onCancelAction: () => void;
   disabled: boolean;
 };
 
@@ -18,8 +18,8 @@ export function Dialog({
   isVisible = false,
   title,
   content,
-  onCancel,
-  onConfirm,
+  onCancelAction,
+  onConfirmAction,
   disabled,
 }: DialogProps) {
   useEffect(() => {
@@ -38,7 +38,7 @@ export function Dialog({
     e.stopPropagation(); // Impede o clique de passar para elementos abaixo
 
     if (!disabled) {
-      onCancel();
+      onCancelAction();
     }
   }
 
@@ -69,7 +69,7 @@ export function Dialog({
           <Button
             variant='ghost'
             autoFocus
-            onClick={onCancel}
+            onClick={onCancelAction}
             disabled={disabled}
             className='w-full'
           >
@@ -78,7 +78,7 @@ export function Dialog({
 
           <Button
             variant='default'
-            onClick={onConfirm}
+            onClick={onConfirmAction}
             disabled={disabled}
             className='w-full bg-red-600 hover:bg-red-700 text-white'
           >

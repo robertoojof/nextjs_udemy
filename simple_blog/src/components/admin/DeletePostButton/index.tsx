@@ -63,8 +63,8 @@ export default function DeletePostButton({ id, title }: DeletePostButtonProps) {
               <span className='font-bold underline'>{title}</span>
             </div>
           }
-          onCancel={() => setShowDialog(false)}
-          onConfirm={handleConfirm}
+          onCancelAction={() => setShowDialog(false)}
+          onConfirmAction={handleConfirm}
           disabled={isPending}
         />
       )}
