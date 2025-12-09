@@ -89,6 +89,18 @@ marcar as páginas com tags usando a função 'tags' do next/cache)
 nota: ao terminar o curso refatorar para uso da diretiva 'use cache' que se
 tornou estável no next 16.
 
+## Hook conhecidos agora
+
+- _usetransition_ Serve para gerenciar estados de transição em componentes
+  React, permitindo que você controle como e quando as atualizações de estado
+  ocorrem, melhorando a experiência do usuário em situações onde mudanças de
+  estado podem ser demoradas ou complexas. uso:
+
+```tsx
+import { useTransition } from 'react';
+const [isPending, startTransition] = useTransition();
+```
+
 ## Links Úteis
 
 - <https://nextjs.org/docs/app/building-your-application/data-fetching/caching>

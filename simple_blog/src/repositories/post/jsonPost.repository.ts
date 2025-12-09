@@ -57,4 +57,8 @@ export class JsonPostRepository implements PostRepository {
 
     return post;
   }
+
+  async delete(id: string): Promise<PostModel> {
+    throw new Error(`${id} Method not implemented.`);
+  }
 }

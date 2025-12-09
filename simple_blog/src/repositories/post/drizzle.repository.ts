@@ -4,6 +4,8 @@ import { drizzleDB } from '@/db/drizzle';
 import { logColor } from '@/utils/log-color';
 import { simulateDelay } from '@/utils/async-delay';
 import { SIMULATED_DELAY_MS } from '@/lib/constants';
+import { postsTable } from '@/db/drizzle/schemas';
+import { eq } from 'drizzle-orm';
 
 export class DrizzlePostRepository implements PostRepository {
   async findAll(): Promise<PostModel[]> {
@@ -30,6 +32,24 @@ export class DrizzlePostRepository implements PostRepository {
     if (!post) {
       throw new Error('Post not found');
     }
+
+    return post;
+  }
+
+  async delete(id: string): Promise<PostModel> {
+    await simulateDelay(SIMULATED_DELAY_MS, true);
+
+    logColor('delete', Date.now());
+
+    const post = await drizzleDB.query.posts.findFirst({
+      where: (posts, { eq }) => eq(posts.id, id),
+    });
+
+    if (!post) {
+      throw new Error('Post not found');
+    }
+
+    await drizzleDB.delete(postsTable).where(eq(postsTable.id, id));
 
     return post;
   }
