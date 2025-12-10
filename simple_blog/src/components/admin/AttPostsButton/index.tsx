@@ -3,14 +3,19 @@
 import { attPostsAction } from '@/app/actions/post/att-posts.action';
 import { cn } from '@/lib/utils';
 import { useTransition } from 'react';
+import { toast } from 'react-toastify';
 
 export default function AttPostsButton() {
   const [isPending, startTransition] = useTransition();
 
   function handleClick() {
+    toast.dismiss();
+
     startTransition(async () => {
       await attPostsAction();
     });
+
+    toast.success('Posts atualizados com sucesso!');
   }
 
   return (
