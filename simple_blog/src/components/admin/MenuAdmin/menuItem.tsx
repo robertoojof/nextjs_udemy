@@ -8,16 +8,9 @@ export type MenuItemProps = {
   link: string;
   icon: React.ReactNode;
   target?: '_blank' | '_self';
-  onClickAction?: () => void;
 };
 
-export default function MenuItem({
-  title,
-  link,
-  icon,
-  target,
-  onClickAction,
-}: MenuItemProps) {
+export default function MenuItem({ title, link, icon, target }: MenuItemProps) {
   const linkClasses = cn(
     '[&>svg]:w-4 [&>svg]:h-4 px-4',
     'flex items-center justify-start gap-2',
@@ -28,12 +21,7 @@ export default function MenuItem({
   );
 
   return (
-    <Link
-      href={link}
-      className={linkClasses}
-      target={target}
-      onClick={onClickAction}
-    >
+    <Link href={link} className={linkClasses} target={target}>
       {icon}
       <span>{title}</span>
     </Link>

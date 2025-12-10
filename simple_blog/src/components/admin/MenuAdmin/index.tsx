@@ -8,8 +8,9 @@ import {
   MenuIcon,
   PlusIcon,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MenuItem, { MenuItemProps } from './menuItem';
+import { usePathname } from 'next/navigation';
 
 const menuItens: MenuItemProps[] = [
   {
@@ -32,15 +33,19 @@ const menuItens: MenuItemProps[] = [
 
 export function MenuAdmin() {
   const [isOpen, setIsOpen] = useState(false);
+  const path = usePathname();
 
-  const handleClose = () => setIsOpen(false);
+  useEffect(() => {
+    if (isOpen) setIsOpen(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [path]);
 
   const navClasses = cn(
     'bg-slate-900 text-slate-100 rounded-lg',
     'flex flex-col mb-8',
     'sm:flex-row sm:flex-wrap',
     'transition-all duration-300 ease-in-out',
-    !isOpen ? 'max-h-10 overflow-hidden' : 'max-h-[300px]',
+    !isOpen ? 'max-h-10 overflow-hidden' : 'max-h-[300px] overflow-y-auto',
     'sm:overflow-visible sm:h-auto',
   );
 
@@ -73,12 +78,8 @@ export function MenuAdmin() {
         )}
       </button>
 
-      {menuItens.map(item => (
-        <MenuItem
-          key={`nav-item-${item.title}`}
-          {...item}
-          onClickAction={handleClose}
-        />
+      {menuItens.map((item, index) => (
+        <MenuItem key={`nav-item-${item.title}-${index}`} {...item} />
       ))}
     </nav>
   );
