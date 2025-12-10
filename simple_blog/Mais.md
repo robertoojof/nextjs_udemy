@@ -24,6 +24,16 @@ Rotas:
 
 - /admin/login - página de login (dinâmico,pública)
 
+## Sobre o tailwindcss
+
+Ele é mobile first, ou seja, as classes sem prefixo são para mobile (smaller
+than 640px) e as classes com prefixo são para telas maiores. Exemplo:
+
+- `bg-red-500` - aplica o fundo vermelho em todas as telas
+- `md:bg-blue-500` - aplica o fundo azul em telas médias (768px) ou maiores
+- `lg:bg-green-500` - aplica o fundo verde em telas grandes (1024px) ou maiores
+  ...
+
 ## Sobre o cache do Next.js
 
 O build dá informações sobre as páginas Por exemplo, se eu tenho uma página que
