@@ -8,11 +8,32 @@ import {
   MenuIcon,
   PlusIcon,
 } from 'lucide-react';
-import Link from 'next/link';
 import { useState } from 'react';
+import MenuItem, { MenuItemProps } from './menuItem';
+
+const menuItens: MenuItemProps[] = [
+  {
+    title: 'Home',
+    link: '/',
+    target: '_blank',
+    icon: <HouseIcon />,
+  },
+  {
+    title: 'Posts',
+    link: '/admin/post',
+    icon: <FileTextIcon />,
+  },
+  {
+    title: 'Criar post',
+    link: '/admin/post/new',
+    icon: <PlusIcon />,
+  },
+];
 
 export function MenuAdmin() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleClose = () => setIsOpen(false);
 
   const navClasses = cn(
     'bg-slate-900 text-slate-100 rounded-lg',
@@ -23,17 +44,12 @@ export function MenuAdmin() {
     'sm:overflow-visible sm:h-auto',
   );
 
-  const linkClasses = cn(
+  const openCloseBtnClasses = cn(
     '[&>svg]:w-4 [&>svg]:h-4 px-4',
     'flex items-center justify-start gap-2',
     'transition hover:bg-slate-700 rounded-lg',
     'h-10',
     'shrink-0',
-    'hover:scale-105',
-  );
-
-  const openCloseBtnClasses = cn(
-    linkClasses,
     'hover:scale-100 cursor-pointer',
     'text-blue-200 italic',
     'sm:hidden',
@@ -44,41 +60,26 @@ export function MenuAdmin() {
       <button
         onClick={() => setIsOpen(prev => !prev)}
         className={openCloseBtnClasses}
+        aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
       >
-        {!isOpen && (
+        {!isOpen ? (
           <>
-            <MenuIcon />
-            Menu
+            <MenuIcon /> Menu
           </>
-        )}
-        {isOpen && (
+        ) : (
           <>
-            <CircleXIcon />
-            Fechar
+            <CircleXIcon /> Fechar
           </>
         )}
       </button>
 
-      <button onClick={() => setIsOpen(false)}>
-        <Link className={linkClasses} href='/' target='_blank'>
-          <HouseIcon />
-          Home
-        </Link>
-      </button>
-
-      <button onClick={() => setIsOpen(false)}>
-        <Link className={linkClasses} href='/admin/post'>
-          <FileTextIcon />
-          Posts
-        </Link>
-      </button>
-
-      <button onClick={() => setIsOpen(false)}>
-        <Link className={linkClasses} href='/admin/post/new'>
-          <PlusIcon />
-          Criar post
-        </Link>
-      </button>
+      {menuItens.map(item => (
+        <MenuItem
+          key={`nav-item-${item.title}`}
+          {...item}
+          onClickAction={handleClose}
+        />
+      ))}
     </nav>
   );
 }
