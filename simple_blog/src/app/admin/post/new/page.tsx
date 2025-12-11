@@ -1,7 +1,36 @@
-export default async function AdminNewPostPage() {
+import { InputText } from '@/components/InputText';
+
+export default async function AdminPostNewPage() {
   return (
-    <div>
-      <h1>Admin Post New post page</h1>
+    <div className='flex flex-col gap-6'>
+      <InputText
+        labelText='Nome'
+        placeholder='Digite seu nome'
+        type='password'
+      />
+      <InputText labelText='Sobrenome' placeholder='Digite seu sobrenome' />
+      <InputText
+        disabled
+        labelText='Sobrenome'
+        placeholder='Digite seu sobrenome'
+        defaultValue='Olá mundo'
+      />
+      <InputText
+        disabled
+        labelText='Sobrenome'
+        placeholder='Digite seu sobrenome'
+      />
+      <InputText
+        labelText='Sobrenome'
+        placeholder='Digite seu sobrenome'
+        readOnly
+      />
+      <InputText
+        labelText='Sobrenome'
+        placeholder='Digite seu sobrenome'
+        defaultValue='Olá mundo'
+        readOnly
+      />
     </div>
   );
 }
