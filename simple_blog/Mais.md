@@ -118,3 +118,4 @@ const [isPending, startTransition] = useTransition();
 ## Links Úteis
 
 - <https://nextjs.org/docs/app/building-your-application/data-fetching/caching>
+- <http://nextjs.org/blog>
