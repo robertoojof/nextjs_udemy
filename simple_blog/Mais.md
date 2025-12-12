@@ -79,7 +79,11 @@ revalidatePath('/admin/post');
 
 ### Server Actions
 
-diretiva 'use server' no componente ou função.
+diretiva 'use server' no arquivo(colocando no topo, assim todas as funções
+dentro dele são server actions) ou função.
+
+Com a diretiva no topo do arquivo é bom evitar a criação de funções helpers,
+pois podem ser expostas ao cliente coisas que são do servidor.
 
 ```tsx
 'use server';
