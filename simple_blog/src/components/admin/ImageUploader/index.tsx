@@ -7,11 +7,18 @@ import {
   IMAGE_UPLOAD_MAX_FILE_SIZE_MB,
 } from '@/lib/constants';
 import { ImageUpIcon } from 'lucide-react';
-import { useRef, useTransition } from 'react';
+import Image from 'next/image';
+import { useRef, useState, useTransition } from 'react';
 import { toast } from 'react-toastify';
 
-export function ImageUploader() {
+type ImageUploaderProps = {
+  disabled?: boolean;
+};
+
+export function ImageUploader({ disabled = false }: ImageUploaderProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [imgUrl, setImgUrl] = useState<string | null>(null);
+
   const [isUploading, startTransition] = useTransition();
 
   function handleButtonClick() {
@@ -21,7 +28,12 @@ export function ImageUploader() {
   }
 
   function handleFileChange() {
-    if (!fileInputRef.current) return;
+    toast.dismiss();
+
+    if (!fileInputRef.current) {
+      setImgUrl('');
+      return;
+    }
 
     const fileInput = fileInputRef.current;
     // .files pq pode ser configurado para enviar mais de um arquivo
@@ -39,31 +51,67 @@ export function ImageUploader() {
       return;
     }
 
-    // TODO: Implementar upload para o servidor (ACTION)
     const formData = new FormData();
     formData.append('file', file);
 
     startTransition(async () => {
       const result = await uploadImage(formData);
-      console.log('Resultado do upload:', result);
+      // console.log('Resultado do upload:', result);
+
+      if (result.error) {
+        toast.error(`${result.error}`);
+        fileInput.value = '';
+        return;
+      }
+
+      setImgUrl(result.url);
+      toast.success(`Imagem enviada com sucesso! URL: ${result.url}`);
     });
 
     fileInput.value = '';
   }
 
   return (
-    <div className='flex flex-col gap-2 py-4'>
-      <Button onClick={handleButtonClick} type='button' className='self-start'>
-        Enviar uma imagem <ImageUpIcon />
-      </Button>
-      <input
-        ref={fileInputRef}
-        onChange={handleFileChange}
-        className='hidden'
-        type='file'
-        name='file'
-        accept='image/*'
-      />
-    </div>
+    <>
+      <div className='flex flex-col gap-2 py-4'>
+        <Button
+          onClick={handleButtonClick}
+          type='button'
+          className='self-start'
+          disabled={isUploading || disabled}
+        >
+          Enviar uma imagem <ImageUpIcon />
+        </Button>
+
+        <div className='text-sm text-slate-600'>
+          {imgUrl && (
+            <div className='flex flex-col gap-4'>
+              <p>
+                <b>URL:</b> {imgUrl}
+              </p>
+
+              <Image
+                src={imgUrl}
+                width={1200}
+                height={720}
+                className='w-auto h-auto rounded object-cover'
+                alt='Preview'
+                unoptimized
+              />
+            </div>
+          )}
+        </div>
+
+        <input
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          className='hidden'
+          type='file'
+          name='file'
+          accept='image/*'
+          disabled={isUploading || disabled}
+        />
+      </div>
+    </>
   );
 }
