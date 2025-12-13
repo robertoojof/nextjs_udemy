@@ -1,12 +1,15 @@
 'use client';
 
-import { uploadImage } from '@/app/actions/upload/upload-image.action';
+import {
+  deleteImage,
+  uploadImage,
+} from '@/app/actions/upload/upload-image.action';
 import { Button } from '@/components/Button';
 import {
   IMAGE_UPLOAD_MAX_FILE_SIZE_BYTES,
   IMAGE_UPLOAD_MAX_FILE_SIZE_MB,
 } from '@/lib/constants';
-import { ImageUpIcon } from 'lucide-react';
+import { ImageUpIcon, Trash2Icon } from 'lucide-react';
 import Image from 'next/image';
 import { useRef, useState, useTransition } from 'react';
 import { toast } from 'react-toastify';
@@ -71,17 +74,41 @@ export function ImageUploader({ disabled = false }: ImageUploaderProps) {
     fileInput.value = '';
   }
 
+  async function handleDeleteImage() {
+    await deleteImage(imgUrl || '')
+      .then(() => {
+        toast.success('Imagem deletada do servidor');
+      })
+      .catch(() => {
+        toast.error('Erro ao deletar a imagem do servidor');
+      });
+
+    fileInputRef.current!.value = '';
+    setImgUrl(null);
+    toast.info('Imagem removida');
+  }
+
   return (
     <>
       <div className='flex flex-col gap-2 py-4'>
-        <Button
-          onClick={handleButtonClick}
-          type='button'
-          className='self-start'
-          disabled={isUploading || disabled}
-        >
-          Enviar uma imagem <ImageUpIcon />
-        </Button>
+        <div className='flex gap-2'>
+          <Button
+            onClick={handleButtonClick}
+            type='button'
+            className='self-start'
+            disabled={isUploading || disabled}
+          >
+            Enviar uma imagem <ImageUpIcon />
+          </Button>
+          <Button
+            type='button'
+            variant='danger'
+            onClick={handleDeleteImage}
+            disabled={!imgUrl || disabled}
+          >
+            <Trash2Icon />
+          </Button>
+        </div>
 
         <div className='text-sm text-slate-600'>
           {imgUrl && (

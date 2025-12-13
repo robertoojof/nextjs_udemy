@@ -65,7 +65,7 @@ export async function uploadImage(
 export async function deleteImage(imageUrl: string): Promise<boolean> {
   try {
     const url = new URL(imageUrl);
-    const imagePath = url.pathname; // e.g., /uploads/1234567890.png
+    const imagePath = url.pathname;
     const imageFileName = imagePath.split('/').pop();
     if (!imageFileName) {
       throw new Error('Invalid image URL');
