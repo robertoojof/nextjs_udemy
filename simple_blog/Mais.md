@@ -115,7 +115,14 @@ import { useTransition } from 'react';
 const [isPending, startTransition] = useTransition();
 ```
 
+- _useactionstate_ Serve para gerenciar o estado de ações do servidor (server
+  actions) em componentes React no Next.js, permitindo que você acompanhe o
+  progresso e o estado dessas ações, como carregamento, sucesso ou falha, e
+  atualize a UI de acordo. uso:
+
+
 ## Links Úteis
 
 - <https://nextjs.org/docs/app/building-your-application/data-fetching/caching>
 - <http://nextjs.org/blog>
+```
