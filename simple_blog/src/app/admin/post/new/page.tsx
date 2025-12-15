@@ -5,12 +5,11 @@ export const metadata: Metadata = {
   title: 'Criar post',
 };
 
-
 export default async function AdminPostNewPage() {
   return (
     <>
       <h1>Criar post</h1>
-      <ManagePostForm />
+      <ManagePostForm mode='create' />
     </>
   );
 }

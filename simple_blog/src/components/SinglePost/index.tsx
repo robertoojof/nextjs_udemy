@@ -21,6 +21,8 @@ export default async function SinglePost({ slug }: SinglePostProps) {
           width={1200}
           height={720}
           alt={post.title}
+          //TODO: REMOVER necessidade do unoptimized
+          unoptimized
         />
 
         <PostHeading link={`/post/${post.slug}`}>{post.title}</PostHeading>

@@ -1,1 +1,85 @@
 'use server';
+
+import { PostUpdateSchema } from '@/app/post/validations';
+import { makePartialPublicPost, PublicPost } from '@/dto/post/post.dto';
+import { PostModel } from '@/models/post/post.model';
+import { postRepository } from '@/repositories/post';
+import { getZodErrorMessages } from '@/utils/get-zod-error-messages';
+import { makeSlugFromText } from '@/utils/make-slug-from-text';
+import { updateTag } from 'next/cache';
+import { redirect } from 'next/navigation';
+import { v4 as uuid } from 'uuid';
+
+type updatePostActionState = {
+  formState: PublicPost;
+  errors: string[];
+  success?: true;
+};
+
+export async function updatePostAction(
+  prevState: updatePostActionState,
+  formData: FormData,
+): Promise<updatePostActionState> {
+  // TODO: verificar se o usuário tá logado
+
+  if (!(formData instanceof FormData)) {
+    return {
+      formState: prevState.formState,
+      errors: ['Dados de formulário inválidos'],
+    };
+  }
+
+  const id = formData.get('id')?.toString() || '';
+
+  if (!id || typeof id !== 'string') {
+    return {
+      formState: prevState.formState,
+      errors: ['ID do post é inválido'],
+    };
+  }
+
+  // const title = formData.get('title')?.toString() || '';
+  const formDataToObj = Object.fromEntries(formData.entries());
+  const zodParsedObj = PostUpdateSchema.safeParse(formDataToObj);
+
+  if (!zodParsedObj.success) {
+    const errors = getZodErrorMessages(zodParsedObj.error.format());
+    return {
+      formState: makePartialPublicPost(formDataToObj),
+      errors: errors,
+    };
+  }
+
+  const validPostData = zodParsedObj.data;
+  const newPost = {
+    ...validPostData,
+  };
+
+  let post;
+
+  try {
+    post = await postRepository.update(id, newPost);
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      return {
+        formState: makePartialPublicPost(formDataToObj),
+        errors: [e.message],
+      };
+    }
+
+    return {
+      formState: makePartialPublicPost(formDataToObj),
+      errors: ['Erro desconhecido'],
+    };
+  }
+
+  updateTag('posts');
+  updateTag(`post-${post.slug}`);
+  // redirect(`/admin/post/${newPost.id}`);
+
+  return {
+    formState: makePartialPublicPost(post),
+    errors: [],
+    success: true,
+  };
+}

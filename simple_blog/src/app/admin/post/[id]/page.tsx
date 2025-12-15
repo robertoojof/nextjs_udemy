@@ -28,7 +28,7 @@ export default async function AdminPostIdPage({
   return (
     <>
       <h1>EDITAR post</h1>
-      <ManagePostForm publicPost={publicPost}/>
+      <ManagePostForm mode='update' publicPost={publicPost} />
     </>
   );
 }

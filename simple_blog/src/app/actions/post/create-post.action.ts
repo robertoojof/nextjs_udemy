@@ -1,8 +1,6 @@
 'use server';
 
 import { PostCreateSchema } from '@/app/post/validations';
-import { drizzleDB } from '@/db/drizzle';
-import { postsTable } from '@/db/drizzle/schemas';
 import { makePartialPublicPost, PublicPost } from '@/dto/post/post.dto';
 import { PostModel } from '@/models/post/post.model';
 import { postRepository } from '@/repositories/post';
@@ -15,6 +13,7 @@ import { v4 as uuid } from 'uuid';
 type createPostActionState = {
   formState: PublicPost;
   errors: string[];
+  success?: true;
 };
 
 export async function createPostAction(
