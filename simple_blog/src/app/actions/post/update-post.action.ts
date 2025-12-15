@@ -2,13 +2,9 @@
 
 import { PostUpdateSchema } from '@/app/post/validations';
 import { makePartialPublicPost, PublicPost } from '@/dto/post/post.dto';
-import { PostModel } from '@/models/post/post.model';
 import { postRepository } from '@/repositories/post';
 import { getZodErrorMessages } from '@/utils/get-zod-error-messages';
-import { makeSlugFromText } from '@/utils/make-slug-from-text';
 import { updateTag } from 'next/cache';
-import { redirect } from 'next/navigation';
-import { v4 as uuid } from 'uuid';
 
 type updatePostActionState = {
   formState: PublicPost;
