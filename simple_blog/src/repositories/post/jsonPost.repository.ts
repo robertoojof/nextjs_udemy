@@ -3,8 +3,9 @@ import { PostRepository } from '@/repositories/post/post.repository';
 import { resolve } from 'path';
 import fs from 'fs';
 import { PostsSchema } from '@/models/post/post.schema';
-import { SIMULATED_DELAY_MS } from '@/lib/constants';
-import { simulateDelay } from '@/utils/async-delay';
+// const simulateDelayMS = Number(process.env.simulateDelayMS);
+
+// import { simulateDelay } from '@/utils/async-delay';
 
 const ROOT_DIR = process.cwd();
 const JSON_POSTS_FILE_PATH = resolve(
@@ -17,7 +18,7 @@ const JSON_POSTS_FILE_PATH = resolve(
 
 export class JsonPostRepository implements PostRepository {
   private async _readFromDisk(): Promise<PostModel[]> {
-    await simulateDelay(SIMULATED_DELAY_MS);
+    // await simulateDelay(simulateDelayMS);
 
     const data = await fs.promises.readFile(JSON_POSTS_FILE_PATH, 'utf-8');
     const json = JSON.parse(data);

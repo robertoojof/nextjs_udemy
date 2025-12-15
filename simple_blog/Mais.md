@@ -159,6 +159,34 @@ module.exports = {
 };
 ```
 
+## Env em next
+
+O next possui um modulo para carregamento das variáveis de ambiente: `@next/env`
+Se você precisar carregar variáveis ​​de ambiente fora do ambiente de execução
+do Next.js, como em um arquivo de configuração raiz para um ORM ou executor de
+testes, você pode usar o @next/envpacote.
+
+Este pacote é usado internamente pelo Next.js para carregar variáveis ​​de
+ambiente a partir de .env\*arquivos.
+
+### Ordem de carregamento das variáveis de ambiente
+
+As variáveis de ambiente são carregadas na seguinte ordem, onde as últimas
+definições sobrescrevem as anteriores:
+
+process.env
+
+1. .env.$(NODE_ENV).local
+2. .env.local (Not checked when NODE_ENV is test.)
+3. .env.$(NODE_ENV)
+4. .env
+
+Por exemplo, se NODE_ENV for development e você definir uma variável em ambos
+.env.development.local e .env, o valor em .env.development.local será usado.
+
+Bom saber: Os valores permitidos para NODE_ENV são production, development e
+test.
+
 ## Links Úteis
 
 - <https://nextjs.org/docs/app/building-your-application/data-fetching/caching>

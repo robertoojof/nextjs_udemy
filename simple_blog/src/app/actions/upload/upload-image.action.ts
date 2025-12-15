@@ -1,10 +1,5 @@
 'use server';
 
-import {
-  IMAGE_SERVER_URL,
-  IMAGE_UPLOAD_DIRECTORY,
-  IMAGE_UPLOAD_MAX_FILE_SIZE_BYTES,
-} from '@/lib/constants';
 import { logColor } from '@/utils/log-color';
 import { mkdir, writeFile } from 'fs/promises';
 import { extname, resolve } from 'path';
@@ -32,7 +27,7 @@ export async function uploadImage(
     return makeResult('', 'Arquivo inválido');
   }
 
-  if (file.size > IMAGE_UPLOAD_MAX_FILE_SIZE_BYTES) {
+  if (file.size > Number(process.env.IMAGE_UPLOAD_MAX_FILE_SIZE_BYTES)) {
     return makeResult('', 'Arquivo muito grande');
   }
 
@@ -46,7 +41,7 @@ export async function uploadImage(
   const uploadFullPath = resolve(
     process.cwd(),
     'public',
-    IMAGE_UPLOAD_DIRECTORY,
+    process.env.IMAGE_UPLOAD_DIRECTORY!,
   );
   await mkdir(uploadFullPath, { recursive: true });
 
@@ -57,7 +52,7 @@ export async function uploadImage(
 
   await writeFile(fileFullPath, buffer);
 
-  const url = `${IMAGE_SERVER_URL}/${uniqueImageName}`;
+  const url = `${process.env.IMAGE_SERVER_URL!}/${uniqueImageName}`;
 
   return makeResult(url);
 }
@@ -73,7 +68,7 @@ export async function deleteImage(imageUrl: string): Promise<boolean> {
     const uploadFullPath = resolve(
       process.cwd(),
       'public',
-      IMAGE_UPLOAD_DIRECTORY,
+      process.env.IMAGE_UPLOAD_DIRECTORY!,
       imageFileName,
     );
     await import('fs/promises').then(({ unlink }) => unlink(uploadFullPath));

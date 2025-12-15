@@ -3,13 +3,16 @@ import { PostRepository } from './post.repository';
 import { drizzleDB } from '@/db/drizzle';
 import { logColor } from '@/utils/log-color';
 import { simulateDelay } from '@/utils/async-delay';
-import { SIMULATED_DELAY_MS } from '@/lib/constants';
+// import { simulateDelayMS } from '@/lib/constants';
 import { postsTable } from '@/db/drizzle/schemas';
 import { eq } from 'drizzle-orm';
 
+const simulateDelayMS = Number(process.env.SIMULATED_DELAY_MS);
+
 export class DrizzlePostRepository implements PostRepository {
   async findAll(): Promise<PostModel[]> {
-    await simulateDelay(SIMULATED_DELAY_MS, true);
+    logColor('Simulate delay: ', String(process.env.simulateDelayMS));
+    await simulateDelay(simulateDelayMS, true);
 
     logColor('findAll', Date.now());
 
@@ -21,7 +24,7 @@ export class DrizzlePostRepository implements PostRepository {
   }
 
   async findById(id: string): Promise<PostModel> {
-    await simulateDelay(SIMULATED_DELAY_MS, true);
+    await simulateDelay(simulateDelayMS, true);
 
     logColor('findById', Date.now());
 
@@ -37,7 +40,7 @@ export class DrizzlePostRepository implements PostRepository {
   }
 
   async findAllPublic(): Promise<PostModel[]> {
-    await simulateDelay(SIMULATED_DELAY_MS, true);
+    await simulateDelay(simulateDelayMS, true);
 
     logColor('findAllPublic', Date.now());
 
@@ -50,7 +53,7 @@ export class DrizzlePostRepository implements PostRepository {
   }
 
   async findBySlugPublic(slug: string): Promise<PostModel> {
-    await simulateDelay(SIMULATED_DELAY_MS, true);
+    await simulateDelay(simulateDelayMS, true);
 
     logColor('findBySlugPublic', Date.now());
 
