@@ -5,11 +5,12 @@ import { makePartialPublicPost, PublicPost } from '@/dto/post/post.dto';
 import { postRepository } from '@/repositories/post';
 import { getZodErrorMessages } from '@/utils/get-zod-error-messages';
 import { updateTag } from 'next/cache';
+import { makeRandomString } from '@/utils/make-random-string';
 
 type updatePostActionState = {
   formState: PublicPost;
   errors: string[];
-  success?: true;
+  success?: string;
 };
 
 export async function updatePostAction(
@@ -76,6 +77,6 @@ export async function updatePostAction(
   return {
     formState: makePartialPublicPost(post),
     errors: [],
-    success: true,
+    success: makeRandomString(),
   };
 }
