@@ -58,6 +58,16 @@ export class JsonPostRepository implements PostRepository {
     return post;
   }
 
+  // mutations
+  create(post: PostModel): Promise<PostModel> {
+    throw new Error('Method not implemented.');
+  }
+  update(
+    id: string,
+    newPostData: Omit<PostModel, 'id' | 'slug' | 'createdAt' | 'updatedAt'>,
+  ): Promise<PostModel> {
+    throw new Error('Method not implemented.');
+  }
   async delete(id: string): Promise<PostModel> {
     throw new Error(`${id} Method not implemented.`);
   }

@@ -28,6 +28,8 @@ export default function PostCoverImage({
           'hover:scale-105 transition w-full h-full object-center object-cover',
           imageProps.className,
         )}
+        //TODO: REMOVER necessidade do unoptimized
+        unoptimized={true}
       />
     </Link>
   );
