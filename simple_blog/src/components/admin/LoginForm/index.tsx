@@ -1,6 +1,6 @@
 'use client';
 
-import { loginAction } from '@/actions/login/login-action';
+import { loginAction } from '@/app/actions/login/login.action';
 import { Button } from '@/components/Button';
 import { InputText } from '@/components/InputText';
 import clsx from 'clsx';

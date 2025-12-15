@@ -1,6 +1,6 @@
 'use server';
 
-import { asyncDelay } from '@/utils/async-delay';
+import { simulateDelay } from '@/utils/async-delay';
 
 type LoginActionState = {
   username: string;
@@ -8,7 +8,7 @@ type LoginActionState = {
 };
 
 export async function loginAction(state: LoginActionState, formData: FormData) {
-  await asyncDelay(5000); // Vou manter
+  await simulateDelay(5000); // Vou manter
 
   return {
     username: '',
