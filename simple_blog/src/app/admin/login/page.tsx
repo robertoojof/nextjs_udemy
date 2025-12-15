@@ -1,7 +1,9 @@
+import { LoginForm } from '@/components/admin/LoginForm';
+
 export default async function AdminLoginPage() {
   return (
     <div>
-      <h1>Admin Login Page</h1>
+      return <LoginForm />;
     </div>
   );
 }
