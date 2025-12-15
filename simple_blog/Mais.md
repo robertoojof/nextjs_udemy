@@ -120,9 +120,46 @@ const [isPending, startTransition] = useTransition();
   progresso e o estado dessas ações, como carregamento, sucesso ou falha, e
   atualize a UI de acordo. uso:
 
+## Imagens no Next.js
+
+No Next.js, o componente `<Image>` é usado para otimizar e gerenciar imagens de
+forma eficiente. Ele oferece recursos como carregamento automático,
+redimensionamento responsivo, suporte a formatos modernos e otimização de
+desempenho. Ao utilizar o componente `<Image>`, você pode melhorar a velocidade
+de carregamento das páginas e a experiência do usuário, garantindo que as
+imagens sejam exibidas de maneira adequada em diferentes dispositivos e tamanhos
+de tela.
+
+```tsx
+import Image from 'next/image';
+<Image
+  src='/caminho/para/imagem.jpg'
+  alt='Descrição da imagem'
+  width={600}
+  height={400}
+/>;
+```
+
+No `nextConfig` é nessário configurar os domínios das imagens externas que serão
+usadas no projeto. Exemplo:
+
+```ts
+// next.config.js
+module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'example.com',
+        port: '',
+        pathname: '/images/**',
+      },
+    ],
+  },
+};
+```
 
 ## Links Úteis
 
 - <https://nextjs.org/docs/app/building-your-application/data-fetching/caching>
 - <http://nextjs.org/blog>
-```
