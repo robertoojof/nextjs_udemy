@@ -7,13 +7,19 @@ import { SIMULATED_DELAY_MS } from '@/lib/constants';
 import { simulateDelay } from '@/utils/async-delay';
 
 const ROOT_DIR = process.cwd();
-const JSON_POSTS_PATH = resolve(ROOT_DIR, 'src', 'db', 'seed', 'posts.json');
+const JSON_POSTS_FILE_PATH = resolve(
+  ROOT_DIR,
+  'src',
+  'db',
+  'seed',
+  'posts.json',
+);
 
 export class JsonPostRepository implements PostRepository {
   private async _readFromDisk(): Promise<PostModel[]> {
     await simulateDelay(SIMULATED_DELAY_MS);
 
-    const data = await fs.promises.readFile(JSON_POSTS_PATH, 'utf-8');
+    const data = await fs.promises.readFile(JSON_POSTS_FILE_PATH, 'utf-8');
     const json = JSON.parse(data);
 
     const result = PostsSchema.safeParse(json);
@@ -25,6 +31,11 @@ export class JsonPostRepository implements PostRepository {
     const publishedPosts = result.data.posts.filter(post => post.published);
 
     return publishedPosts;
+  }
+
+  private async writeToDisk(posts: PostModel[]): Promise<void> {
+    const jsonToString = JSON.stringify({ posts }, null, 2);
+    await fs.promises.writeFile(JSON_POSTS_FILE_PATH, jsonToString, 'utf-8');
   }
 
   async findAll(): Promise<PostModel[]> {
@@ -59,16 +70,60 @@ export class JsonPostRepository implements PostRepository {
   }
 
   // mutations
-  create(post: PostModel): Promise<PostModel> {
-    throw new Error('Method not implemented.');
+  async create(post: PostModel): Promise<PostModel> {
+    const posts = await this.findAll();
+
+    if (!post.id || !post.slug) {
+      throw new Error('Post sem ID ou Slug');
+    }
+
+    const idOrSlugExist = posts.find(
+      savedPost => savedPost.id === post.id || savedPost.slug === post.slug,
+    );
+
+    if (idOrSlugExist) {
+      throw new Error('ID ou Slug devem ser únicos');
+    }
+
+    posts.push(post);
+    await this.writeToDisk(posts);
+
+    return post;
   }
-  update(
+
+  async update(
     id: string,
     newPostData: Omit<PostModel, 'id' | 'slug' | 'createdAt' | 'updatedAt'>,
   ): Promise<PostModel> {
-    throw new Error('Method not implemented.');
+    const posts = await this.findAll();
+    const postIndex = posts.findIndex(p => p.id === id);
+    const savedPost = posts[postIndex];
+
+    if (postIndex < 0) {
+      throw new Error('Post não existe');
+    }
+
+    const newPost = {
+      ...savedPost,
+      ...newPostData,
+      updatedAt: new Date().toISOString(),
+    };
+    posts[postIndex] = newPost;
+    await this.writeToDisk(posts);
+    return newPost;
   }
   async delete(id: string): Promise<PostModel> {
-    throw new Error(`${id} Method not implemented.`);
+    const posts = await this.findAll();
+    const postIndex = posts.findIndex(p => p.id === id);
+
+    if (postIndex < 0) {
+      throw new Error('Post não existe');
+    }
+
+    const post = posts[postIndex];
+    posts.splice(postIndex, 1);
+    await this.writeToDisk(posts);
+
+    return post;
   }
 }
