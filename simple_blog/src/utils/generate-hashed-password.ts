@@ -1,7 +1,7 @@
 import { hashPassword } from '@/lib/login/manage-login';
 
 (async () => {
-  const minhaSenha = 'chocolate co'; // NÃO ESQUECER DE APAGAR SUA SENHA DAQUI
+  const minhaSenha = 'chocolate-comprimenta**'; // NÃO ESQUECER DE APAGAR SUA SENHA DAQUI - SENHA FICTICIA
   const hashDaSuaSenhaEmBase64 = await hashPassword(minhaSenha);
 
   console.log({ hashDaSuaSenhaEmBase64 });
