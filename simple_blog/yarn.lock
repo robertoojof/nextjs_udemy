@@ -2086,6 +2086,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bcryptjs@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "bcryptjs@npm:3.0.3"
+  bin:
+    bcrypt: bin/bcrypt
+  checksum: 10c0/127c94699f07eab5fbbb89d600c3f0e36ae6fd001e028139740b41fffb62a23a2743523fb88f442ae3308a27d4843b97ccb9e436d78f5c5899be187d0972c6d5
+  languageName: node
+  linkType: hard
+
 "better-sqlite3@npm:^12.5.0":
   version: 12.5.0
   resolution: "better-sqlite3@npm:12.5.0"
@@ -6868,6 +6877,7 @@ __metadata:
     "@types/sanitize-html": "npm:^2.16.0"
     "@uiw/react-md-editor": "npm:^4.0.11"
     babel-plugin-react-compiler: "npm:1.0.0"
+    bcryptjs: "npm:^3.0.3"
     better-sqlite3: "npm:^12.5.0"
     clsx: "npm:^2.1.1"
     date-fns: "npm:^4.1.0"
