@@ -4,8 +4,8 @@ import { loginAction } from '@/app/actions/login/login.action';
 import { Button } from '@/components/Button';
 import { InputText } from '@/components/InputText';
 import clsx from 'clsx';
-import { LogInIcon } from 'lucide-react';
-import { useActionState, useEffect } from 'react';
+import { EyeClosedIcon, EyeIcon, LogInIcon } from 'lucide-react';
+import { useActionState, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 export function LoginForm() {
@@ -21,6 +21,8 @@ export function LoginForm() {
       toast.error(state.error);
     }
   }, [state]);
+
+  const [isVisiblePassword, setVisiblePassword] = useState(false);
 
   return (
     <div
@@ -39,13 +41,22 @@ export function LoginForm() {
           defaultValue={state.username}
         />
 
-        <InputText
-          type='password'
-          name='password'
-          labelText='Senha'
-          placeholder='Sua senha'
-          disabled={isPending}
-        />
+        <div className='grid grid-cols-[1fr_auto] items-end gap-2'>
+          <InputText
+            type={isVisiblePassword ? 'text' : 'password'}
+            name='password'
+            labelText='Senha'
+            placeholder='Sua senha'
+            disabled={isPending}
+          />
+          <button
+            type='button'
+            className={`cursor-pointer mb-2 transition`}
+            onClick={() => setVisiblePassword(prev => !prev)}
+          >
+            <span>{isVisiblePassword ? <EyeIcon /> : <EyeClosedIcon />}</span>
+          </button>
+        </div>
 
         <Button disabled={isPending} type='submit' className='mt-4'>
           <LogInIcon />

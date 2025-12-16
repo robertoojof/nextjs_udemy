@@ -10,6 +10,15 @@ type LoginActionState = {
 };
 
 export async function loginAction(state: LoginActionState, formData: FormData) {
+  const allowLogin = Boolean(Number(process.env.ALLOW_LOGIN));
+
+  if (!allowLogin) {
+    return {
+      username: '',
+      error: 'Login not allowed',
+    };
+  }
+
   // await asyncDelay(5000); // Vou manter
 
   if (!(formData instanceof FormData)) {
@@ -31,19 +40,25 @@ export async function loginAction(state: LoginActionState, formData: FormData) {
   }
 
   // Aqui eu checaria se o usuário existe na base de dados
-  const isUsernameValid = username === process.env.LOGIN_USER;
-  const isPasswordValid = await verifyPassword(
-    password,
-    process.env.LOGIN_PASS || '',
-  );
+  try {
+    const isUsernameValid = username === process.env.LOGIN_USER;
+    const isPasswordValid = await verifyPassword(
+      password,
+      process.env.LOGIN_PASS!,
+    );
 
-  if (!isUsernameValid || !isPasswordValid) {
-    return {
-      username,
-      error: 'Usuário ou senha inválidos',
-    };
+    if (!isUsernameValid || !isPasswordValid) {
+      return {
+        username,
+        error: 'Usuário ou senha inválidos',
+      };
+    }
+
+    await createLoginSession(username);
+  } catch (error) {
+    console.error('Erro no login:', error);
+    return { username, error: 'Ocorreu um erro interno ao tentar logar.' };
   }
 
-  await createLoginSession(username);
   redirect('/admin/post');
 }
