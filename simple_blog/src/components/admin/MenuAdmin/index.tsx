@@ -4,13 +4,16 @@ import { cn } from '@/lib/utils';
 import {
   CircleXIcon,
   FileTextIcon,
+  HourglassIcon,
   HouseIcon,
+  LogOutIcon,
   MenuIcon,
   PlusIcon,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import MenuItem, { MenuItemProps } from './menuItem';
 import { usePathname } from 'next/navigation';
+import { logoutAction } from '@/app/actions/login/logout.action';
 
 const menuItens: MenuItemProps[] = [
   {
@@ -39,6 +42,16 @@ export function MenuAdmin() {
     if (isOpen) setIsOpen(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [path]);
+
+  const [isPending, startTransition] = useTransition();
+
+  function handleLogout(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault();
+
+    startTransition(async () => {
+      await logoutAction();
+    });
+  }
 
   const navClasses = cn(
     'bg-slate-900 text-slate-100 rounded-lg',
@@ -81,6 +94,23 @@ export function MenuAdmin() {
       {menuItens.map((item, index) => (
         <MenuItem key={`nav-item-${item.title}-${index}`} {...item} />
       ))}
+
+      <button
+        onClick={handleLogout}
+        className='flex items-center justify-start gap-2 [&>svg]:w-4 [&>svg]:h-4 px-4 transition hover:bg-slate-700 rounded-lg h-10 shrink-0 hover:scale-105 mt-2 sm:mt-0 cursor-pointer'
+        disabled={isPending}
+      >
+        {isPending ? (
+          <>
+            Saindo...
+            <HourglassIcon />
+          </>
+        ) : (
+          <>
+            Sair <LogOutIcon />
+          </>
+        )}
+      </button>
     </nav>
   );
 }

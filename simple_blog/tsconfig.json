@@ -39,7 +39,7 @@
       ],
       "@utils/*": [
         "./src/utils/*"
-      ],
+      ]
     }
   },
   "include": [
@@ -49,7 +49,8 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts",
-    "drizzle.config.mjs"
+    "drizzle.config.mjs",
+    ".next/dev/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

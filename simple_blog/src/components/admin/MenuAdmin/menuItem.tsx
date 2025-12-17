@@ -5,10 +5,10 @@ import Link from 'next/link';
 
 export type MenuItemProps = {
   title: string;
-  link: string;
+  link?: string;
   icon: React.ReactNode;
   target?: '_blank' | '_self';
-};
+} & React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
 export default function MenuItem({ title, link, icon, target }: MenuItemProps) {
   const linkClasses = cn(
@@ -21,7 +21,7 @@ export default function MenuItem({ title, link, icon, target }: MenuItemProps) {
   );
 
   return (
-    <Link href={link} className={linkClasses} target={target}>
+    <Link href={link ?? ''} className={linkClasses} target={target}>
       {icon}
       <span>{title}</span>
     </Link>
