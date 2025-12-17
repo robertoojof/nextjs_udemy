@@ -187,6 +187,16 @@ Por exemplo, se NODE_ENV for development e você definir uma variável em ambos
 Bom saber: Os valores permitidos para NODE_ENV são production, development e
 test.
 
+## Next Middleware (deprecated)
+
+O Next.js Middleware permite executar código antes que uma solicitação seja
+processada, possibilitando a modificação de solicitações e respostas. Ele é útil
+para tarefas como autenticação, redirecionamentos e manipulação de cabeçalhos.
+
+Ele recebe um objeto NextRequest e deve retornar um objeto NextResponse ou nada
+(void). Se nada for retornado, a solicitação continuará seu curso normal. - Vale
+corrigir -
+
 ## Links Úteis
 
 - <https://nextjs.org/docs/app/building-your-application/data-fetching/caching>
