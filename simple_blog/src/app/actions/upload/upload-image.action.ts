@@ -1,5 +1,6 @@
 'use server';
 
+import { verifyLoginSession } from '@/lib/login/manage-login';
 import { logColor } from '@/utils/log-color';
 import { mkdir, writeFile } from 'fs/promises';
 import { extname, resolve } from 'path';
@@ -53,6 +54,12 @@ export async function uploadImage(
   await writeFile(fileFullPath, buffer);
 
   const url = `${process.env.IMAGE_SERVER_URL!}/${uniqueImageName}`;
+
+  const isAuthenticated = await verifyLoginSession();
+
+  if (!isAuthenticated) {
+    return makeResult('', 'Faça login novamente em outra aba');
+  }
 
   return makeResult(url);
 }

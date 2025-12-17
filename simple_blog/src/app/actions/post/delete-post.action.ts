@@ -1,5 +1,6 @@
 'use server';
 
+import { verifyLoginSession } from '@/lib/login/manage-login';
 // import { verifyLoginSession } from '@/lib/login/manage-login';
 import { postRepository } from '@/repositories/post';
 import { updateTag } from 'next/cache';
@@ -11,13 +12,13 @@ type DeletePostActionResult = {
 export async function deletePostAction(
   id: string,
 ): Promise<DeletePostActionResult> {
-  // const isAuthenticated = await verifyLoginSession();
+  const isAuthenticated = await verifyLoginSession();
 
-  // if (!isAuthenticated) {
-  //   return {
-  //     error: 'Faça login novamente em outra aba',
-  //   };
-  // }
+  if (!isAuthenticated) {
+    return {
+      error: 'Faça login novamente em outra aba',
+    };
+  }
 
   if (!id || typeof id !== 'string') {
     return {

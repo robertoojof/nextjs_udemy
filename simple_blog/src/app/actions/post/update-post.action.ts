@@ -6,6 +6,7 @@ import { postRepository } from '@/repositories/post';
 import { getZodErrorMessages } from '@/utils/get-zod-error-messages';
 import { updateTag } from 'next/cache';
 import { makeRandomString } from '@/utils/make-random-string';
+import { verifyLoginSession } from '@/lib/login/manage-login';
 
 type updatePostActionState = {
   formState: PublicPost;
@@ -17,7 +18,7 @@ export async function updatePostAction(
   prevState: updatePostActionState,
   formData: FormData,
 ): Promise<updatePostActionState> {
-  // TODO: verificar se o usuário tá logado
+  const isAuthenticated = await verifyLoginSession();
 
   if (!(formData instanceof FormData)) {
     return {
@@ -38,6 +39,13 @@ export async function updatePostAction(
   // const title = formData.get('title')?.toString() || '';
   const formDataToObj = Object.fromEntries(formData.entries());
   const zodParsedObj = PostUpdateSchema.safeParse(formDataToObj);
+
+  if (!isAuthenticated) {
+    return {
+      formState: makePartialPublicPost(formDataToObj),
+      errors: ['Faça login novamente em outra aba'],
+    };
+  }
 
   if (!zodParsedObj.success) {
     const errors = getZodErrorMessages(zodParsedObj.error.format());

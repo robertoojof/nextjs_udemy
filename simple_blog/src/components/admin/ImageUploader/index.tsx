@@ -5,10 +5,6 @@ import {
   uploadImage,
 } from '@/app/actions/upload/upload-image.action';
 import { Button } from '@/components/Button';
-import {
-  IMAGE_UPLOAD_MAX_FILE_SIZE_BYTES,
-  IMAGE_UPLOAD_MAX_FILE_SIZE_MB,
-} from '@/lib/constants';
 import { ImageUpIcon, Trash2Icon } from 'lucide-react';
 import Image from 'next/image';
 import { useRef, useState, useTransition } from 'react';
@@ -46,9 +42,9 @@ export function ImageUploader({ disabled = false }: ImageUploaderProps) {
 
     console.log('Arquivo selecionado:', file);
 
-    if (file.size > IMAGE_UPLOAD_MAX_FILE_SIZE_BYTES) {
+    if (file.size > Number(process.env.IMAGE_UPLOAD_MAX_FILE_SIZE_BYTES)) {
       toast.error(
-        `O arquivo deve ser menor que ${IMAGE_UPLOAD_MAX_FILE_SIZE_MB}MB`,
+        `O arquivo deve ser menor que ${Number(process.env.IMAGE_UPLOAD_MAX_FILE_SIZE_MB)}MB`,
       );
       fileInput.value = '';
       return;

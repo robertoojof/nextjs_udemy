@@ -2,6 +2,7 @@
 
 import { PostCreateSchema } from '@/app/post/validations';
 import { makePartialPublicPost, PublicPost } from '@/dto/post/post.dto';
+import { verifyLoginSession } from '@/lib/login/manage-login';
 import { PostModel } from '@/models/post/post.model';
 import { postRepository } from '@/repositories/post';
 import { getZodErrorMessages } from '@/utils/get-zod-error-messages';
@@ -20,12 +21,19 @@ export async function createPostAction(
   prevState: createPostActionState,
   formData: FormData,
 ): Promise<createPostActionState> {
-  // TODO: verificar se o usuário tá logado
+  const isAuthenticated = await verifyLoginSession();
 
   if (!(formData instanceof FormData)) {
     return {
       formState: prevState.formState,
       errors: ['Dados de formulário inválidos'],
+    };
+  }
+
+  if (!isAuthenticated) {
+    return {
+      formState: prevState.formState,
+      errors: ['Faça login novamente em outra aba'],
     };
   }
 
