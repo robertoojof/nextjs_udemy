@@ -11,7 +11,7 @@ const simulateDelayMS = Number(process.env.SIMULATED_DELAY_MS);
 
 export class DrizzlePostRepository implements PostRepository {
   async findAll(): Promise<PostModel[]> {
-    logColor('Simulate delay: ', String(process.env.simulateDelayMS));
+    logColor('Simulate delay: ', String(process.env.SIMULATED_DELAY_MS));
     await simulateDelay(simulateDelayMS, true);
 
     logColor('findAll', Date.now());
