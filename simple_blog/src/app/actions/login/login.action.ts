@@ -9,7 +9,10 @@ type LoginActionState = {
   error: string;
 };
 
-export async function loginAction(state: LoginActionState, formData: FormData) {
+export async function loginAction(
+  _state: LoginActionState,
+  formData: FormData,
+) {
   const allowLogin = Boolean(Number(process.env.ALLOW_LOGIN));
 
   if (!allowLogin) {

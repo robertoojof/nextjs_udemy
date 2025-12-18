@@ -119,7 +119,7 @@ export function ImageUploader({ disabled = false }: ImageUploaderProps) {
                 height={720}
                 className='w-auto h-auto rounded object-cover'
                 alt='Preview'
-                unoptimized
+                unoptimized={true}
               />
             </div>
           )}
