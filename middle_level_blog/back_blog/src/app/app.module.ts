@@ -7,6 +7,7 @@ import { UserModule } from 'src/user/user.module';
 import { UploadModule } from 'src/upload/upload.module';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from 'src/database/database.module';
+import { HealthModule } from 'src/health/health.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { DatabaseModule } from 'src/database/database.module';
     UserModule,
     UploadModule,
     DatabaseModule,
+    HealthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
