@@ -7,6 +7,7 @@ export class PostController {
 
   @Get()
   helloFromPost() {
-    return this.postService.helloFromPost();
+    // return this.postService.helloFromPost();
+    return 'Hello from Post Controller';
   }
 }
